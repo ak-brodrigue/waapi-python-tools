@@ -3,7 +3,13 @@
 from waapi import WaapiClient, CannotConnectToWaapiException
 from pprint import pprint
 from collections import defaultdict
-import sys, re, math, os
+import sys, re, math, os, argparse
+
+# Define arguments for the script
+parser = argparse.ArgumentParser(description='Generate text to speech for the specified Wwise object ID.')
+parser.add_argument('id', metavar='GUID', nargs='?', help='One guid of the form {01234567-89ab-cdef-0123-4567890abcde}. The script retrieves the current selected if no GUID specified.')
+
+args = parser.parse_args()
 
 notes = {
     'c': 0,
@@ -42,15 +48,15 @@ try:
     # Connecting to Waapi using default URL
     with WaapiClient() as client:
 
-        # Obtain the selection
-        selected  = client.call("ak.wwise.ui.getSelectedObjects")['objects']
+        if args.id is None:
+            selected  = client.call("ak.wwise.ui.getSelectedObjects")['objects']
+            if len(selected) != 1:
+                raise Exception('Only works with a single selection')
+            args.id = selected[0]['id']
 
-        if len(selected) == 0:
-            raise Exception('Please select an object')
-
-        # Get all children objects for the selection
-        args = {
-            "from": {"id": [selected[0]['id']]},
+        # Obtain more information for all objects being passed
+        get_args = {
+            "from": {"id": [args.id]},
             "transform": [
                 {"select": ['children']}
             ]
@@ -58,7 +64,7 @@ try:
         options = {
             "return": ['id', 'name','type']
         }
-        sounds = client.call("ak.wwise.core.object.get", args, options=options)['return']
+        sounds = client.call("ak.wwise.core.object.get", get_args, options=options)['return']
 
         # Parse the sound names and find the MIDI notes
         groups = defaultdict(list)
@@ -156,4 +162,3 @@ except CannotConnectToWaapiException:
 
 except Exception as e:
     print(str(e))
-    input("Press key to continue...")

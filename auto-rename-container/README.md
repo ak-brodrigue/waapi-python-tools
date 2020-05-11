@@ -2,28 +2,13 @@
 
 Automatically rename a container based on the name of its children.
 
-## Usage
+**Attention**: The project only works if all the children of a container start with the same prefix.
 
-### Add the command to Wwise
+## Instructions
 
-Refer to [Defining custom commands](https://www.audiokinetic.com/library/edge/?source=SDK&id=defining__custom__commands.html) in the Wwise SDK documentation.
+**Note**: Refer to installation instructions in [waapi-python-tools](../README.md).
 
-### Example command definition
-```json
-{
-    "commands": [
-        {
-            "id": "ak.auto_rename_container",
-            "displayName": "Auto Rename Container",
-            "defaultShortcut": "Alt+R",
-            "program": "pyw",
-            "startMode": "SingleSelectionSingleProcess",
-            "args": "C:\\waapi-python-tools\\auto-rename-container",
-            "cwd": "",
-            "contextMenu": {
-                "basePath": "Add-ons"
-            }
-        }
-    ]
-}
-```
+1. Create a container.
+2. Import sample sounds in the container. The sounds must all start with the same prefix.
+3. Select the container.
+4. Right click and select **Auto Rename Container** or run the script manually.

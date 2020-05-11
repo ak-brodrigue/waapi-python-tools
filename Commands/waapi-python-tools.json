@@ -1,0 +1,45 @@
+{
+    "commands":[
+        {
+            "id":"ak.text-to-speech",
+            "displayName":"Generate Text-to-Speech",
+            "defaultShortcut":"",
+            "program":"py.exe",
+            "startMode":"MultipleSelectionSingleProcessSpaceSeparated",
+            "args":"-3 ${CurrentCommandDirectory}\\..\\text-to-speech --original \"${WwiseProjectOriginals}\" ${id}",
+            "cwd":"",
+            "contextMenu":{
+                    "basePath":"",
+                    "enabledFor":"Sound"
+                },
+            "redirectOutputs":true
+        },
+        {
+            "id":"ak.auto-midi-map",
+            "displayName":"Auto MIDI map",
+            "defaultShortcut":"",
+            "program":"py.exe",
+            "startMode":"MultipleSelectionMultipleProcesses",
+            "args":"-3 ${CurrentCommandDirectory}\\..\\auto-midi-map ${id}",
+            "cwd":"",
+            "contextMenu":{
+                    "basePath":"",
+                    "enabledFor":"BlendContainer"
+                },
+            "redirectOutputs":true
+        },
+        {
+            "id":"ak.auto-rename-container",
+            "displayName":"Auto Rename Container",
+            "defaultShortcut":"",
+            "program":"py.exe",
+            "startMode":"MultipleSelectionMultipleProcesses",
+            "args":"-3 ${CurrentCommandDirectory}\\..\\auto-rename-container ${id}",
+            "cwd":"",
+            "contextMenu":{
+                    "basePath":""
+                },
+            "redirectOutputs":true
+        }        
+    ]
+}
