@@ -2,7 +2,7 @@
 
 This repository is a collection of tools to be used inside Audiokinetic Wwise. The tools use WAAPI (Wwise Authoring API) and Python to perform several automated tasks.
 
-Refer to **General Setup Instruction** below, then find the specific instructions README.md in the sub-folders.
+Refer to **General Setup Instructions** below, then find the specific instructions README.md in the sub-folders.
 
 ## Requirements
 * Python 3.6+
@@ -25,7 +25,7 @@ We recommend to use the Python Launcher for Windows which is installed with Pyth
 Additional instructions can be found at:
 https://pypi.org/project/waapi-client/
 
-### Installing the command add-ons
+### Installing the Command Add-ons
 
 1. Ensure the folder `%APPDATA%\Audiokinetic\Wwise\Add-ons` is present. Create `Add-ons` if not present.
 2. Download this whole repository zip file from GitHub.
@@ -49,3 +49,6 @@ https://www.audiokinetic.com/library/edge/?source=SDK&id=waapi.html
 
 To learn more about using Python with WAAPI:
 https://www.audiokinetic.com/library/edge/?source=SDK&id=waapi_client_python_rpc.html
+
+To learn more about Command Add-ons:
+https://www.audiokinetic.com/library/edge/?source=SDK&id=defining_custom_commands.html
