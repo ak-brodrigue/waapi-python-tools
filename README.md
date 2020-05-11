@@ -25,15 +25,22 @@ We recommend to use the Python Launcher for Windows which is installed with Pyth
 Additional instructions can be found at:
 https://pypi.org/project/waapi-client/
 
-### Installing the Command Add-ons
+### Installing the Command Add-ons (2019.2.x+)
 
 1. Ensure the folder `%APPDATA%\Audiokinetic\Wwise\Add-ons` is present. Create `Add-ons` if not present.
 2. Download this whole repository zip file from GitHub.
-3. Unzip the content from `waapi-python-tools` folder inside `Add-ons`
+3. Unzip the content from `waapi-python-tools` folder inside `Add-ons`.
 4. Restart Wwise or use the command **Reload Commands**
 
 At the end, the following file structure should be present:  
 `%APPDATA%\Audiokinetic\Wwise\Add-ons\Commands\waapi-python-tools.json`
+
+### Installing for External Editors (2018.1.x)
+
+1. Download this whole repository zip file from GitHub.
+2. Unzip the content of zip file on your computer.
+3. In Wwise, open **Project > User Preferences**.
+4. Add `<tool-name>.cmd` in the **External Editors** list.
 
 ## Running the script
 
