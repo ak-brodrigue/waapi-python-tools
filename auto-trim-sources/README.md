@@ -35,7 +35,13 @@ optional arguments:
 ```
 ## Requirements
 
-* Wwise 2022.1.x+
+ * Wwise 2022.1.x+
+ * Python 3.6+
+ * Python packages:
+
+    `py -3 -m pip install waapi-client`
+    
+    `py -3 -m pip install scipy`
 
 ## Instructions
 
