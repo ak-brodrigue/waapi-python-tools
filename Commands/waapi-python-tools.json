@@ -40,6 +40,19 @@
                     "basePath":""
                 },
             "redirectOutputs":true
-        }        
+        },
+        {
+            "id":"ak.auto-trim",
+            "displayName":"Auto Trim Sources",
+            "defaultShortcut":"",
+            "program":"py.exe",
+            "startMode":"MultipleSelectionSingleProcesses",
+            "args":"-3 ${CurrentCommandDirectory}\\..\\auto-trim-sources ${id}",
+            "cwd":"",
+            "contextMenu":{
+                    "basePath":""
+                },
+            "redirectOutputs":true
+        }         
     ]
 }
