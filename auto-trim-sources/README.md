@@ -19,13 +19,13 @@ optional arguments:
     Threshold in decibels under which the begin is trimmed. (Default:-40)
 
   --threshold_end [THRESHOLD_END]
-    Threshold in decibels under which the end is trimmed. (Default:-30)
+    Threshold in decibels under which the end is trimmed. (Default:-40)
 
-  --trim_begin [TRIM_BEGIN]
-    Trim the begin of the sources (Default:True)
+  --no_trim_begin
+    Do not trim the begin of the sources
 
-  --trim_end [TRIM_END]
-    Trim the end of the sources (Default:True)
+  --no_trim_end
+    Do not trim the end of the sources
 
   --fade_begin [FADE_BEGIN]
     Fade duration when trimming begin (Default:0)
@@ -33,6 +33,12 @@ optional arguments:
   --fade_end [FADE_END]
     Fade duration when trimming end (Default:0.02)
 ```
+
+Example:
+
+`py -3 .\auto-trim-sources\ "{FB573826-0E68-4129-9376-21EC85F3168B}"  --no_trim_begin --threshold_end -45`
+
+
 ## Requirements
 
  * Wwise 2022.1.x+
