@@ -11,7 +11,8 @@ parser.add_argument('--threshold_end', const=1, default=-40, type=int, nargs='?'
 parser.add_argument('--no_trim_begin', const=1, default=False, type=bool, nargs='?', help='Trim the begin of the sources')
 parser.add_argument('--no_trim_end', const=1, default=False, type=bool, nargs='?', help='Trim the end of the sources')
 parser.add_argument('--fade_begin', const=1, default=0, type=float, nargs='?', help='Fade duration when trimming begin')
-parser.add_argument('--fade_end', const=1, default=0.02, type=float, nargs='?', help='Fade duration when trimming end')
+parser.add_argument('--fade_end', const=1, default=0.01, type=float, nargs='?', help='Fade duration when trimming end')
+parser.add_argument('--initial_delay', const=1, default=False, type=bool, nargs='?', help='Trimming applied on the begin with be compensated by initial delay')
 
 args = parser.parse_args()
 
@@ -24,6 +25,13 @@ convert_sample_functions = {
     "int32" : lambda s : s / 2147483647,
     "float32" : lambda s : s
 }
+
+def get_convert_sample_function(data):
+    # return a function converting the raw data to a single float value
+    base_convert = convert_sample_functions[data.dtype.name]
+    if len(data.shape) == 1:
+        return base_convert
+    return lambda a : base_convert(a.max())
 
 try:
 
@@ -46,7 +54,7 @@ try:
 
             # Use WAQL to obtain all audio sources under the object
             call_args = { "waql": f"$ \"{obj['id']}\" select this, descendants where type = \"AudioFileSource\""}
-            options = { "return": ["originalWavFilePath", "type", "id"]}
+            options = { "return": ["originalWavFilePath", "type", "id", "parent.id"]}
 
             sources = client.call("ak.wwise.core.object.get", call_args, options=options)
 
@@ -57,15 +65,17 @@ try:
                 print(f"Processing {source['originalWavFilePath']}...")
 
                 duration = data.shape[0] / sample_rate
-                trim_end_pos = data.size-1
+                channels =  data.shape[1] if len(data.shape) == 2 else 1
+                num_samples = int(data.size/channels)
+                trim_end_pos = num_samples-1
                 trim_begin_pos = 0
 
-                convert_sample = convert_sample_functions[data.dtype.name]
+                convert_sample = get_convert_sample_function(data)
                 last_zero_crossing = 0
                 last_value = 0
 
                 # Look the PCM data, and find a trim begin
-                for i in range(0, data.size-1):
+                for i in range(0, num_samples-1):
                     value = convert_sample(data[i])
 
                     # Store zero crossing
@@ -80,10 +90,10 @@ try:
                     last_value = value
 
                 # Find the trim end
-                last_zero_crossing = data.size-1
+                last_zero_crossing = num_samples-1
                 last_value = 0
 
-                for i in range(data.size-1, trim_begin_pos, -1):
+                for i in range(num_samples-1, trim_begin_pos, -1):
                     value = convert_sample(data[i])
 
                     # Store zero crossing
@@ -97,17 +107,21 @@ try:
                     last_value = value
 
                 # Set the trim and fade properties on the source object
-                set_object = { "object":source['id'] }
+                set_sound = { "object":source['parent.id'] }
+                set_source = { "object":source['id'] }
                 if (not args.no_trim_begin) and trim_begin_pos > 0:
-                    set_object["@TrimBegin"] = trim_begin_pos / sample_rate
-                if (not args.no_trim_end) and trim_end_pos < data.size - 1:
-                    set_object["@TrimEnd"] = trim_end_pos / sample_rate
+                    set_source["@TrimBegin"] = trim_begin_pos / sample_rate
+                    
+                if (not args.no_trim_end) and trim_end_pos < num_samples - 1:
+                    set_source["@TrimEnd"] = trim_end_pos / sample_rate
+                    set_sound["@InitialDelay"] = trim_end_pos / sample_rate
 
-                set_object["@FadeInDuration"] = args.fade_begin
-                set_object["@FadeOutDuration"] = args.fade_end
+                set_source["@FadeInDuration"] = args.fade_begin
+                set_source["@FadeOutDuration"] = args.fade_end
 
                 # Store changes
-                set_args["objects"].append(set_object)
+                set_args["objects"].append(set_source)
+                set_args["objects"].append(set_sound)
 
         client.call("ak.wwise.core.undo.beginGroup")
         client.call("ak.wwise.core.object.set", set_args)
