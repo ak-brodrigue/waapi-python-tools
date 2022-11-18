@@ -46,13 +46,26 @@
             "displayName":"Auto Trim Sources",
             "defaultShortcut":"",
             "program":"py.exe",
-            "startMode":"MultipleSelectionSingleProcesses",
+            "startMode":"MultipleSelectionSingleProcessSpaceSeparated",
             "args":"-3 ${CurrentCommandDirectory}\\..\\auto-trim-sources ${id}",
             "cwd":"",
             "contextMenu":{
                     "basePath":""
                 },
-            "redirectOutputs":true
-        }         
+            "redirectOutputs":false
+        },
+        {
+            "id":"ak.auto-trim-initial-delay",
+            "displayName":"Auto Trim Sources (with Initial Delay)",
+            "defaultShortcut":"",
+            "program":"py.exe",
+            "startMode":"MultipleSelectionSingleProcessSpaceSeparated",
+            "args":"-3 ${CurrentCommandDirectory}\\..\\auto-trim-sources ${id} --initial_delay",
+            "cwd":"",
+            "contextMenu":{
+                    "basePath":""
+                },
+            "redirectOutputs":false
+        }
     ]
 }
