@@ -4,7 +4,7 @@ Automatically trim sources based on the specified decibel threshold. Optionally 
 
 ## Overview
 ```
-usage: . [-h] [--threshold_begin [THRESHOLD_BEGIN]] [--threshold_end [THRESHOLD_END]] [--trim_begin [TRIM_BEGIN]] [--trim_end [TRIM_END]] [--fade_begin [FADE_BEGIN]] [--fade_end [FADE_END]] [GUID ...]
+usage: . [-h] [--threshold_begin [THRESHOLD_BEGIN]] [--threshold_end [THRESHOLD_END]] [--no_trim_begin] [--no_trim_end] [--fade_begin [FADE_BEGIN]] [--fade_end [FADE_END]] [GUID ...]
 
 Automatically trim the sources for specified objects (ID).
 
