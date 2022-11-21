@@ -79,6 +79,19 @@
                     "basePath":""
                 },
             "redirectOutputs":true
+        },
+        {
+            "id":"ak.auto-create-events",
+            "displayName":"Auto Create Event(s) with Work Units",
+            "defaultShortcut":"",
+            "program":"py.exe",
+            "startMode":"MultipleSelectionSingleProcessSpaceSeparated",
+            "args":"-3 ${CurrentCommandDirectory}\\..\\auto-create-events ${id}",
+            "cwd":"",
+            "contextMenu":{
+                    "basePath":""
+                },
+            "redirectOutputs":false
         }        
     ]
 }
