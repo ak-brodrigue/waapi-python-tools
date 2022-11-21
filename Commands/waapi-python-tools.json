@@ -66,6 +66,19 @@
                     "basePath":""
                 },
             "redirectOutputs":false
-        }
+        },
+        {
+            "id":"ak.new-synth-one",
+            "displayName":"New Random Synth One (x10)",
+            "defaultShortcut":"",
+            "program":"py.exe",
+            "startMode":"SingleSelectionSingleProcess",
+            "args":"-3 ${CurrentCommandDirectory}\\..\\new-synth-one ${id} --count=10",
+            "cwd":"",
+            "contextMenu":{
+                    "basePath":""
+                },
+            "redirectOutputs":true
+        }        
     ]
 }
