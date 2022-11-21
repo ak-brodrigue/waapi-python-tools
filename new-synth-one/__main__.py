@@ -4,7 +4,7 @@ from random import uniform, randrange, choice
 import argparse, traceback
 
 # Define arguments for the script
-parser = argparse.ArgumentParser(description='Automatically trim the sources for specified objects (ID).')
+parser = argparse.ArgumentParser(description='Automatically creates new Sound SFX objects using the Synth One source plug-in.')
 parser.add_argument('id', metavar='GUID', nargs='?', help='One guid of the form {01234567-89ab-cdef-0123-4567890abcde}. The script retrieves the current selected if no GUID specified.')
 parser.add_argument('--count', const=1, default=10, type=int, nargs='?', help='Number of instances to generate.')
 
