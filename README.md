@@ -19,8 +19,8 @@ We recommend to use the Python Launcher for Windows which is installed with Pyth
 
 ### Install waapi-client
 
-* **Windows**: `py -3 -m pip install waapi-client`
-* **Other platforms**: `python3 -m pip install waapi-client`
+* **Windows**: `py -3 -m pip install waapi-client scipy`
+* **Other platforms**: `python3 -m pip install waapi-client scipy`
 
 Additional instructions can be found at:
 https://pypi.org/project/waapi-client/
@@ -32,7 +32,7 @@ https://pypi.org/project/waapi-client/
 3. Unzip the content from `waapi-python-tools` folder inside `Add-ons`.
 4. Restart Wwise or use the command **Reload Commands**
 
-At the end, the following file structure should be present:  
+At the end, the following file structure should be present:
 `%APPDATA%\Audiokinetic\Wwise\Add-ons\Commands\waapi-python-tools.json`
 
 ### Installing for External Editors (2018.1.x)
