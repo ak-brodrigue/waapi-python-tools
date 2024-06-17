@@ -109,12 +109,15 @@ try:
                 # Set the trim and fade properties on the source object
                 set_sound = { "object":source['parent.id'] }
                 set_source = { "object":source['id'] }
+
                 if (not args.no_trim_begin) and trim_begin_pos > 0:
                     set_source["@TrimBegin"] = trim_begin_pos / sample_rate
-                    
+
                 if (not args.no_trim_end) and trim_end_pos < num_samples - 1:
                     set_source["@TrimEnd"] = trim_end_pos / sample_rate
-                    set_sound["@InitialDelay"] = trim_end_pos / sample_rate
+
+                if (args.initial_delay):
+                    set_sound["@InitialDelay"] = trim_begin_pos / sample_rate
 
                 set_source["@FadeInDuration"] = args.fade_begin
                 set_source["@FadeOutDuration"] = args.fade_end
