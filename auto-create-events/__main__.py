@@ -78,8 +78,7 @@ try:
             selected  = client.call("ak.wwise.core.object.get", { "waql":f"$ {ids_list}" }, options=options)['return']
 
         set_args = {
-            "objects": [],
-            "onNameConflict": "merge",
+            "objects": []
         }
 
         for obj in selected:
