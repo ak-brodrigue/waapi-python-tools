@@ -92,6 +92,20 @@
                     "basePath":""
                 },
             "redirectOutputs":false
-        }        
+        },
+        {
+            "id":"ak.auto-assign-switch-container",
+            "displayName":"Auto Assign Switch Container",
+            "defaultShortcut":"",
+            "program":"py.exe",
+            "startMode":"MultipleSelectionSingleProcessSpaceSeparated",
+            "args":"-3 ${CurrentCommandDirectory}\\..\\auto-assign-switch-container",
+            "cwd":"",
+            "contextMenu":{
+                    "basePath":"",
+                    "enabledFor":"SwitchContainer"
+                },
+            "redirectOutputs":true
+        }
     ]
 }
