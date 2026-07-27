@@ -249,15 +249,15 @@ try:
 
         # if no ID is passed as argument, use the selected object from the project
         if args.id is None or len(args.id) == 0:
-            selected  = map(lambda s: s["id"], client.call("ak.wwise.ui.getSelectedObjects")['objects'])
+            selected  = list(map(lambda s: s["id"], client.call("ak.wwise.ui.getSelectedObjects")['objects']))
         else:
             selected = [args.id]
 
-        location = "\\Actor-Mixer Hierarchy\\Default Work Unit"
+        location = "\\Containers\\Default Work Unit"
 
         # Try to find the best location to create new sounds
         if len(selected) > 0:
-            ancestors = client.call("ak.wwise.core.object.get", {"waql": f'$ "{selected[0]}" select this, ancestors where type : "container" or type : "folder" or type : "workunit" and category = "actor-mixer hierarchy"'})["return"]
+            ancestors = client.call("ak.wwise.core.object.get", {"waql": f'$ "{selected[0]}" select this, ancestors where type : "container" or type : "folder" or type : "workunit" and category = "Containers"'})["return"]
 
             if len(ancestors) > 0:
                 location = ancestors[0]['id']
